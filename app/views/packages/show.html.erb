@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sort:</b>
+  <%= @package.sort %>
+</p>
+
+<p>
+  <b>Package array:</b>
+  <%= @package.package_array %>
+</p>
+
+<p>
+  <b>Instance:</b>
+  <%= @package.instance_id %>
+</p>
+
+<p>
+  <b>Path:</b>
+  <%= @package.path_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_package_path(@package) %> |
+<%= link_to 'Back', packages_path %>

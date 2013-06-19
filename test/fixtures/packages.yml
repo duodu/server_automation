@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sort: MyString
+  package_array: MyString
+  instance_id: 1
+  path_id: 1
+
+two:
+  sort: MyString
+  package_array: MyString
+  instance_id: 1
+  path_id: 1

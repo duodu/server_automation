@@ -1,0 +1,33 @@
+<%= form_for(@package) do |f| %>
+  <% if @package.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@package.errors.count, "error") %> prohibited this package from being saved:</h2>
+
+      <ul>
+      <% @package.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sort %><br />
+    <%= f.text_field :sort %>
+  </div>
+  <div class="field">
+    <%= f.label :package_array %><br />
+    <%= f.text_field :package_array %>
+  </div>
+  <div class="field">
+    <%= f.label :instance_id %><br />
+    <%= f.number_field :instance_id %>
+  </div>
+  <div class="field">
+    <%= f.label :path_id %><br />
+    <%= f.number_field :path_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

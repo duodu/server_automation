@@ -1,8 +1,16 @@
 ServerAutomation::Application.routes.draw do
   match "instances/:id/command" => "instances#command"
   match "instances/:id/command_send" => "instances#command_send"
-  
+  match "instances/read_deploy" => "instances#read_deploy"
   match "instances/:id/deploy" => "instances#deploy"
+  
+  resources :packages
+
+
+  resources :paths
+
+
+
   
 
   resources :instances
