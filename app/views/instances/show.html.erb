@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Ip:</b>
+  <%= @instance.ip %>
+</p>
+
+<p>
+  <b>Port:</b>
+  <%= @instance.port %>
+</p>
+
+<p>
+  <b>Username:</b>
+  <%= @instance.username %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @instance.password %>
+</p>
+
+<p>
+  <b>Need delete:</b>
+  <%= @instance.need_delete %>
+</p>
+
+<p>
+  <b>Need restart:</b>
+  <%= @instance.need_restart %>
+</p>
+
+<p>
+  <b>Destination:</b>
+  <%= @instance.destination %>
+</p>
+
+<p>
+  <b>Path:</b>
+  <%= @instance.path %>
+</p>
+
+
+<%= link_to 'Edit', edit_instance_path(@instance) %> |
+<%= link_to 'Back', instances_path %>

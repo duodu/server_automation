@@ -1,0 +1,37 @@
+<h1>Listing instances</h1>
+
+<table>
+  <tr>
+    <th>Ip</th>
+    <th>Port</th>
+    <th>Username</th>
+    <th>Password</th>
+    <th>Need delete</th>
+    <th>Need restart</th>
+    <th>Destination</th>
+    <th>Path</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @instances.each do |instance| %>
+  <tr>
+    <td><%= instance.ip %></td>
+    <td><%= instance.port %></td>
+    <td><%= instance.username %></td>
+    <td><%= instance.password %></td>
+    <td><%= instance.need_delete %></td>
+    <td><%= instance.need_restart %></td>
+    <td><%= instance.destination %></td>
+    <td><%= instance.path %></td>
+    <td><%= link_to 'Show', instance %></td>
+    <td><%= link_to 'Edit', edit_instance_path(instance) %></td>
+    <td><%= link_to 'Destroy', instance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Instance', new_instance_path %>
