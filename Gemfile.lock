@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: http://ruby.taobao.org/
   specs:
     actionmailer (3.2.13)
       actionpack (= 3.2.13)
@@ -51,6 +51,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     multi_json (1.7.7)
+    mysql2 (0.3.11)
     mysql2 (0.3.11-x86-mingw32)
     net-scp (1.1.1)
       net-ssh (>= 2.6.5)

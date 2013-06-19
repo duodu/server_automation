@@ -101,13 +101,16 @@ class InstancesController < ApplicationController
     @cmd = Command.find(params[:cmd_id])
   end
   def read_deploy
-    require 'win32ole'
-    @excel = WIN32OLE::new('excel.Application')
-    @workbook = @excel.Workbooks.Open('E:/lib/deploy.xlsx')
-    @worksheet = @workbook.Worksheets(1)
-    @worksheet.Select
     
-    end_row_line = @workbook.Worksheets(1).UsedRange.rows.Count
+    #require 'win32ole'
+    Thread.new do
+    WIN32OLE.codepage = WIN32OLE::CP_UTF8
+    excel = WIN32OLE::new('EXCEL.APPLICATION')
+    workbook = excel.Workbooks.Open('E:/lib/deploy.xlsx')
+    worksheet = workbook.Worksheets(1)
+    worksheet.Select
+    
+    end_row_line = workbook.Worksheets(1).UsedRange.rows.Count
     
     @col = Array.new
     @ip = Array.new
@@ -115,17 +118,23 @@ class InstancesController < ApplicationController
     i = 0
     line = 1
     while i < 6 && line <= end_row_line
-      if @worksheet.Range("A#{line}").value == 'commom'
+      if worksheet.Range("A#{line}").value == 'commom'
         @col[i] = line
         i += 1
       end
       line += 1
     end
     @col.each do |c|
-      @ip << @worksheet.Range("A#{c-1}").value.split("/")[0]
-      @user << @worksheet.Range("A#{c-1}").value.split("/")[1]
+      @ip << worksheet.Range("A#{c-1}").value.split("/")[0]
+      @user << worksheet.Range("A#{c-1}").value.split("/")[1]
     end
-    @workbook.close
-    @excel.Quit
+    
+    puts 'begin close'
+    workbook.close
+    excel.Quit
+    puts 'end close'
+    
+    end
+    
   end
 end
