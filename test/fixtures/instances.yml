@@ -1,21 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  ip: MyString
-  port: 1
-  username: MyString
-  password: MyString
+  ip_id: 1
+  port_id: 1
+  account_id: 1
   need_delete: 1
   need_restart: 1
-  destination: MyString
-  path: MyString
 
 two:
-  ip: MyString
-  port: 1
-  username: MyString
-  password: MyString
+  ip_id: 1
+  port_id: 1
+  account_id: 1
   need_delete: 1
   need_restart: 1
-  destination: MyString
-  path: MyString

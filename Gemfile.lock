@@ -52,6 +52,10 @@ GEM
     mime-types (1.23)
     multi_json (1.7.7)
     mysql2 (0.3.11-x86-mingw32)
+    net-scp (1.1.1)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
     net-ssh (2.6.7)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -105,6 +109,8 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
   mysql2
+  net-scp
+  net-sftp
   net-ssh
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)

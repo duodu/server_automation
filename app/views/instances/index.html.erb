@@ -4,12 +4,11 @@
   <tr>
     <th>Ip</th>
     <th>Port</th>
-    <th>Username</th>
-    <th>Password</th>
+    <th>Account</th>
     <th>Need delete</th>
     <th>Need restart</th>
-    <th>Destination</th>
-    <th>Path</th>
+    <th></th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,17 +16,16 @@
 
 <% @instances.each do |instance| %>
   <tr>
-    <td><%= instance.ip %></td>
-    <td><%= instance.port %></td>
-    <td><%= instance.username %></td>
-    <td><%= instance.password %></td>
+    <td><%= instance.ip.name %></td>
+    <td><%= instance.port.name %></td>
+    <td><%= instance.account.username %></td>
     <td><%= instance.need_delete %></td>
     <td><%= instance.need_restart %></td>
-    <td><%= instance.destination %></td>
-    <td><%= instance.path %></td>
     <td><%= link_to 'Show', instance %></td>
     <td><%= link_to 'Edit', edit_instance_path(instance) %></td>
     <td><%= link_to 'Destroy', instance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Command', :action => 'command', :id => instance.id %></td>
+    <td><%= link_to 'Deploy', :action => 'deploy', :id => instance.id %></td>
   </tr>
 <% end %>
 </table>

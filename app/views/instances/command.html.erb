@@ -1,0 +1,7 @@
+<%= @instance.ip.name %>
+<br />
+<%= @instance.account.username %>
+<%= form_tag "/instances/#{@instance.id}/command_send" do %>
+<%= select_tag :cmd_id , options_for_select(@cmd_array) %>
+<%= submit_tag 'do' %>
+<% end %>

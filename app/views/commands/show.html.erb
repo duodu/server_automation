@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @command.name %>
+</p>
+
+<p>
+  <b>Command string:</b>
+  <%= @command.command_string %>
+</p>
+
+
+<%= link_to 'Edit', edit_command_path(@command) %> |
+<%= link_to 'Back', commands_path %>

@@ -12,20 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :ip %><br />
-    <%= f.text_field :ip %>
+    <%= f.label :ip_id %><br />
+    <%= f.select :ip_id, options_for_select(@ip_array) %>
   </div>
   <div class="field">
-    <%= f.label :port %><br />
-    <%= f.number_field :port %>
+    <%= f.label :port_id %><br />
+    <%= f.select :port_id, options_for_select(@port_array) %>
   </div>
   <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.text_field :password %>
+    <%= f.label :account_id %><br />
+    <%= f.select :account_id, options_for_select(@account_array) %>
   </div>
   <div class="field">
     <%= f.label :need_delete %><br />
@@ -34,14 +30,6 @@
   <div class="field">
     <%= f.label :need_restart %><br />
     <%= f.number_field :need_restart %>
-  </div>
-  <div class="field">
-    <%= f.label :destination %><br />
-    <%= f.text_field :destination %>
-  </div>
-  <div class="field">
-    <%= f.label :path %><br />
-    <%= f.text_field :path %>
   </div>
   <div class="actions">
     <%= f.submit %>

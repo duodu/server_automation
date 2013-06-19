@@ -1,3 +1,6 @@
 class Instance < ActiveRecord::Base
-  attr_accessible :destination, :ip, :need_delete, :need_restart, :password, :path, :port, :username
+  attr_accessible :account_id, :ip_id, :need_delete, :need_restart, :port_id
+  belongs_to :ip
+  belongs_to :port
+  belongs_to :account
 end

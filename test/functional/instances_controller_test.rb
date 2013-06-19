@@ -18,7 +18,7 @@ class InstancesControllerTest < ActionController::TestCase
 
   test "should create instance" do
     assert_difference('Instance.count') do
-      post :create, instance: { destination: @instance.destination, ip: @instance.ip, need_delete: @instance.need_delete, need_restart: @instance.need_restart, password: @instance.password, path: @instance.path, port: @instance.port, username: @instance.username }
+      post :create, instance: { account_id: @instance.account_id, ip_id: @instance.ip_id, need_delete: @instance.need_delete, need_restart: @instance.need_restart, port_id: @instance.port_id }
     end
 
     assert_redirected_to instance_path(assigns(:instance))
@@ -35,7 +35,7 @@ class InstancesControllerTest < ActionController::TestCase
   end
 
   test "should update instance" do
-    put :update, id: @instance, instance: { destination: @instance.destination, ip: @instance.ip, need_delete: @instance.need_delete, need_restart: @instance.need_restart, password: @instance.password, path: @instance.path, port: @instance.port, username: @instance.username }
+    put :update, id: @instance, instance: { account_id: @instance.account_id, ip_id: @instance.ip_id, need_delete: @instance.need_delete, need_restart: @instance.need_restart, port_id: @instance.port_id }
     assert_redirected_to instance_path(assigns(:instance))
   end
 

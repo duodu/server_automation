@@ -11,19 +11,42 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130619025206) do
+ActiveRecord::Schema.define(:version => 20130619063745) do
 
-  create_table "instances", :force => true do |t|
-    t.string   "ip"
-    t.integer  "port"
+  create_table "accounts", :force => true do |t|
     t.string   "username"
     t.string   "password"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "commands", :force => true do |t|
+    t.string   "name"
+    t.string   "command_string"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "instances", :force => true do |t|
+    t.integer  "ip_id"
+    t.integer  "port_id"
+    t.integer  "account_id"
     t.integer  "need_delete"
     t.integer  "need_restart"
-    t.string   "destination"
-    t.string   "path"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "ips", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "ports", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

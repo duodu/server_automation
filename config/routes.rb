@@ -1,8 +1,27 @@
 ServerAutomation::Application.routes.draw do
+  match "instances/:id/command" => "instances#command"
+  match "instances/:id/command_send" => "instances#command_send"
+  
+  match "instances/:id/deploy" => "instances#deploy"
+  
 
-
-  match "instances/:id/ssh" => "instances#ssh"
   resources :instances
+
+
+  resources :accounts
+
+
+  resources :ports
+
+
+  resources :ips
+
+
+  resources :commands
+
+
+
+
   
 
 

@@ -25,6 +25,9 @@ class InstancesController < ApplicationController
   # GET /instances/new.json
   def new
     @instance = Instance.new
+    @ip_array = Ip.all.map { |ip| [ip.name, ip.id] }
+    @port_array = Port.all.map { |port| [port.name, port.id] }
+    @account_array = Account.all.map { |user| [user.username, user.id] }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +38,9 @@ class InstancesController < ApplicationController
   # GET /instances/1/edit
   def edit
     @instance = Instance.find(params[:id])
+    @ip_array = Ip.all.map { |ip| [ip.name, ip.id] }
+    @port_array = Port.all.map { |port| [port.name, port.id] }
+    @account_array = Account.all.map { |user| [user.username, user.id] }
   end
 
   # POST /instances
@@ -57,6 +63,9 @@ class InstancesController < ApplicationController
   # PUT /instances/1.json
   def update
     @instance = Instance.find(params[:id])
+    @ip_array = Ip.all.map { |ip| [ip.name, ip.id] }
+    @port_array = Port.all.map { |port| [port.name, port.id] }
+    @account_array = Account.all.map { |user| [user.username, user.id] }
 
     respond_to do |format|
       if @instance.update_attributes(params[:instance])
@@ -80,10 +89,15 @@ class InstancesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  def ssh
+  def command
     @instance = Instance.find(params[:id])
-    Net::SSH.start(@instance.ip, @instance.username, :password => @instance.password, :port => @instance.port) do |ssh|
-      @res = ssh.exec! 'ls'
-    end
+    @cmd_array = Command.all.map { |cmd| [cmd.name, cmd.id] }
+  end
+  def deploy
+    @instance = Instance.find(params[:id])
+  end
+  def command_send
+    @instance = Instance.find(params[:id])
+    @cmd = Command.find(params[:cmd_id])
   end
 end
