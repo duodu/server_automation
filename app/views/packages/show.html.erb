@@ -1,6 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Ip:</b>
+  <%= @package.ip %>
+</p>
+
+<p>
+  <b>Username:</b>
+  <%= @package.username %>
+</p>
+<p>
   <b>Sort:</b>
   <%= @package.sort %>
 </p>
@@ -10,14 +19,11 @@
   <%= @package.package_array %>
 </p>
 
-<p>
-  <b>Instance:</b>
-  <%= @package.instance_id %>
-</p>
+
 
 <p>
   <b>Path:</b>
-  <%= @package.path_id %>
+  <%= @package.path.name %>
 </p>
 
 

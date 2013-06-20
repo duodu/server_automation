@@ -2,8 +2,9 @@ class CreatePackages < ActiveRecord::Migration
   def change
     create_table :packages do |t|
       t.string :sort
-      t.string :package_array
-      t.integer :instance_id
+      t.text :package_array
+      t.string :ip
+      t.string :username
       t.integer :path_id
 
       t.timestamps

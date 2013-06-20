@@ -95,45 +95,72 @@ class InstancesController < ApplicationController
   end
   def deploy
     @instance = Instance.find(params[:id])
+    
   end
   def command_send
     @instance = Instance.find(params[:id])
     @cmd = Command.find(params[:cmd_id])
   end
   def read_deploy
+    @instance_array = Array.new
     
-    #require 'win32ole'
-    Thread.new do
-    WIN32OLE.codepage = WIN32OLE::CP_UTF8
-    excel = WIN32OLE::new('EXCEL.APPLICATION')
-    workbook = excel.Workbooks.Open('E:/lib/deploy.xlsx')
-    worksheet = workbook.Worksheets(1)
-    worksheet.Select
+    excel = Roo::Excelx.new("E:/lib/deploy.xlsx")
+    excel.default_sheet = excel.sheets.first
+    end_row_line = excel.last_row
     
-    end_row_line = workbook.Worksheets(1).UsedRange.rows.Count
-    
-    @col = Array.new
-    @ip = Array.new
-    @user = Array.new
+    flash[:notice] = Array.new
+    common_row = Array.new
+
     i = 0
     line = 1
     while i < 6 && line <= end_row_line
-      if worksheet.Range("A#{line}").value == 'commom'
-        @col[i] = line
+      if excel.cell('A',line) == 'common'
+        common_row[i] = line
         i += 1
       end
       line += 1
     end
-    @col.each do |c|
-      @ip << worksheet.Range("A#{c-1}").value.split("/")[0]
-      @user << worksheet.Range("A#{c-1}").value.split("/")[1]
-    end
-    
-    puts 'begin close'
-    workbook.close
-    excel.Quit
-    puts 'end close'
-    
+    common_row.each do |row|
+      instance_hash = Hash.new
+      for col in excel.first_column..excel.last_column
+        package = Package.new
+        package.ip = excel.cell('A',row-1).split("/")[0]
+        package.username = excel.cell('A',row-1).split("/")[1]
+        # if Ip.find_by_name(ip) != nil && Account.find_by_username(username) != nil
+          # ip_id = Ip.find_by_name(ip).id
+          # account_id = Account.find_by_username(username).id
+          # if !Instance.where("ip_id = ? and account_id = ?",ip_id,account_id).empty?
+            # instance_id = Instance.where("ip_id = ? and account_id = ?",ip_id,account_id).last.id
+            # package.instance_id = instance_id
+          # else
+            # flash[:notice] << "You need to add the instance with ip = #{ip} and username = #{username}"
+            # package.instance_id = 0
+          # end
+        # else
+          # flash[:notice] << "You need to add ip = #{ip} or username = #{username} first"
+          # package.instance_id = 0
+        # end
+        package.sort = excel.cell(row,col)
+        package.package_array = Array.new
+        line = row
+        while excel.cell(line,col) != nil
+          if  excel.cell(line,col) =~ /ar\z/
+            package.package_array << excel.cell(line,col)
+          end
+          line += 1
+        end
+        package.package_array = package.package_array.join(";")
+        instance_hash.store(package.sort,package.package_array)
+        if package.save
+          
+        else
+          flash[:notice] = package.errors.full_messages
+        end
+      end
+      instance_hash.store("ip",package.ip)
+      instance_hash.store("username",package.username)
+      @instance_array << instance_hash
+      
     end
     
   end

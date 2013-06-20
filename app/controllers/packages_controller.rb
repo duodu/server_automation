@@ -2,7 +2,7 @@ class PackagesController < ApplicationController
   # GET /packages
   # GET /packages.json
   def index
-    @packages = Package.all
+    @packages = Package.order("created_at DESC").limit(18)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,6 +35,7 @@ class PackagesController < ApplicationController
   # GET /packages/1/edit
   def edit
     @package = Package.find(params[:id])
+    @path = Path.all.map { |p| [p.name, p.id] }
   end
 
   # POST /packages

@@ -1,9 +1,47 @@
-<% @col.each do |c| %>
-<%= c %>
+<% if flash[:notice] %>
+  <div style="color: red">
+  	<% flash[:notice].each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+<% else %>
+	<% @instance_array.each do |instance| %>
+		<b>IP:</b>
+		<%= instance["ip"] %>
+		<br />
+		<b>Username:</b>
+		<%= instance["username"] %>
+		<br />
+		<b>common:</b>
+		<%= instance["common"] %>
+		<br />
+		<b>mall:</b>
+		<%= instance["mall"] %>
+		<br />
+		<b>payment:</b>
+		<%= instance["payment"] %>
+		<br />
+		<br />
+	<% end %>
+
 <% end %>
-<% @ip.each do |ip| %>
-<%= ip %>
-<% end %>
-<% @user.each do |u| %>
-<%= u %>
-<% end %>
+
+<% @instance_array.each do |instance| %>
+		<b>IP:</b>
+		<%= instance["ip"] %>
+		<br />
+		<b>Username:</b>
+		<%= instance["username"] %>
+		<br />
+		<b>common:</b>
+		<%= instance["common"] %>
+		<br />
+		<b>mall:</b>
+		<%= instance["mall"] %>
+		<br />
+		<b>payment:</b>
+		<%= instance["payment"] %>
+		<br />
+		<br />
+	<% end %>
+

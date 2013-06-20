@@ -12,20 +12,24 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :sort %><br />
-    <%= f.text_field :sort %>
+    <b><%= f.label :ip %></b><br />
+    <%= @package.ip %>
   </div>
   <div class="field">
-    <%= f.label :package_array %><br />
-    <%= f.text_field :package_array %>
+    <b><%= f.label :username %></b><br />
+    <%= @package.username %>
   </div>
   <div class="field">
-    <%= f.label :instance_id %><br />
-    <%= f.number_field :instance_id %>
+    <b><%= f.label :sort %></b><br />
+    <%= @package.sort %>
   </div>
   <div class="field">
-    <%= f.label :path_id %><br />
-    <%= f.number_field :path_id %>
+    <b><%= f.label :package_array %></b><br />
+    <%= @package.package_array %>
+  </div>
+  <div class="field">
+    <b><%= f.label :path_id %></b><br />
+    <%= f.select :path_id, options_for_select(@path) %>
   </div>
   <div class="actions">
     <%= f.submit %>

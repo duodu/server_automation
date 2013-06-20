@@ -2,12 +2,14 @@
 
 one:
   sort: MyString
-  package_array: MyString
-  instance_id: 1
+  package_array: MyText
+  ip: MyString
+  username: MyString
   path_id: 1
 
 two:
   sort: MyString
-  package_array: MyString
-  instance_id: 1
+  package_array: MyText
+  ip: MyString
+  username: MyString
   path_id: 1

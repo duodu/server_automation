@@ -9,6 +9,7 @@ gem 'mysql2'
 gem 'net-ssh'
 gem 'net-sftp'
 gem 'net-scp'
+gem 'roo'
 
 
 

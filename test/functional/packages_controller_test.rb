@@ -18,7 +18,7 @@ class PackagesControllerTest < ActionController::TestCase
 
   test "should create package" do
     assert_difference('Package.count') do
-      post :create, package: { instance_id: @package.instance_id, package_array: @package.package_array, path_id: @package.path_id, sort: @package.sort }
+      post :create, package: { ip: @package.ip, package_array: @package.package_array, path_id: @package.path_id, sort: @package.sort, username: @package.username }
     end
 
     assert_redirected_to package_path(assigns(:package))
@@ -35,7 +35,7 @@ class PackagesControllerTest < ActionController::TestCase
   end
 
   test "should update package" do
-    put :update, id: @package, package: { instance_id: @package.instance_id, package_array: @package.package_array, path_id: @package.path_id, sort: @package.sort }
+    put :update, id: @package, package: { ip: @package.ip, package_array: @package.package_array, path_id: @package.path_id, sort: @package.sort, username: @package.username }
     assert_redirected_to package_path(assigns(:package))
   end
 

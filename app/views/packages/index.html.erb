@@ -2,9 +2,10 @@
 
 <table>
   <tr>
+    <th>Ip</th>
+    <th>Username</th>
     <th>Sort</th>
     <th>Package array</th>
-    <th>Instance</th>
     <th>Path</th>
     <th></th>
     <th></th>
@@ -13,10 +14,15 @@
 
 <% @packages.each do |package| %>
   <tr>
+    <td><%= package.ip %></td>
+    <td><%= package.username %></td>
     <td><%= package.sort %></td>
     <td><%= package.package_array %></td>
-    <td><%= package.instance_id %></td>
-    <td><%= package.path_id %></td>
+    <% if package.path != nil%>
+    <td><%= package.path.name %></td>
+    <% else %>
+    <td></td>
+    <% end %>
     <td><%= link_to 'Show', package %></td>
     <td><%= link_to 'Edit', edit_package_path(package) %></td>
     <td><%= link_to 'Destroy', package, method: :delete, data: { confirm: 'Are you sure?' } %></td>
