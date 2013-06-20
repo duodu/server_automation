@@ -23,8 +23,11 @@
 
 <p>
   <b>Path:</b>
-  <%= @package.path.name %>
+  <% if @package.path != nil %>
+  	<%= @package.path.name %>
+  <% end %>
 </p>
+
 
 
 <%= link_to 'Edit', edit_package_path(@package) %> |
