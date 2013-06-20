@@ -127,6 +127,7 @@ class InstancesController < ApplicationController
     @cmd = Command.find(params[:cmd_id])
   end
   def read_deploy
+    date = Time.new.strftime("%Y%m%d%H%M%S")
     @instance_array = Array.new
     
     excel = Roo::Excelx.new("E:/lib/deploy.xlsx")
@@ -149,6 +150,7 @@ class InstancesController < ApplicationController
       instance_hash = Hash.new
       for col in excel.first_column..excel.last_column
         package = Package.new
+        package.batch_date = date
         package.ip = excel.cell('A',row-1).split("/")[0]
         package.username = excel.cell('A',row-1).split("/")[1]
         # if Ip.find_by_name(ip) != nil && Account.find_by_username(username) != nil

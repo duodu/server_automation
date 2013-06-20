@@ -2,7 +2,14 @@ class PackagesController < ApplicationController
   # GET /packages
   # GET /packages.json
   def index
-    @packages = Package.order("created_at DESC").limit(18)
+    if !Package.all.empty?
+      last_batch_date = Package.all.last.batch_date
+      @packages = Package.where("batch_date = ?",last_batch_date)
+    else
+      @packages = Package.all
+    end
+    
+    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -23,14 +30,15 @@ class PackagesController < ApplicationController
 
   # GET /packages/new
   # GET /packages/new.json
-  def new
-    @package = Package.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @package }
-    end
-  end
+  # def new
+    # @package = Package.new
+    # @path = Path.all.map { |p| [p.name, p.id] }
+# 
+    # respond_to do |format|
+      # format.html # new.html.erb
+      # format.json { render json: @package }
+    # end
+  # end
 
   # GET /packages/1/edit
   def edit
@@ -58,6 +66,7 @@ class PackagesController < ApplicationController
   # PUT /packages/1.json
   def update
     @package = Package.find(params[:id])
+    @path = Path.all.map { |p| [p.name, p.id] }
 
     respond_to do |format|
       if @package.update_attributes(params[:package])

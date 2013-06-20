@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20130620073024) do
     t.string   "ip"
     t.string   "username"
     t.integer  "path_id"
+    t.datetime "batch_date"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end

@@ -6,6 +6,7 @@ class CreatePackages < ActiveRecord::Migration
       t.string :ip
       t.string :username
       t.integer :path_id
+      t.datetime :batch_date
 
       t.timestamps
     end
