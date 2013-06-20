@@ -94,7 +94,32 @@ class InstancesController < ApplicationController
     @cmd_array = Command.all.map { |cmd| [cmd.name, cmd.id] }
   end
   def deploy
+    Dir::chdir('E:/lib/')
     @instance = Instance.find(params[:id])
+    if !Package.where("ip = ? and username = ?",@instance.ip.name,@instance.account.username).empty?
+      packages = Package.where("ip = ? and username = ?",@instance.ip.name,@instance.account.username)
+      packages.each do |package|
+        package_array = package.package_array.split(";")
+        path = package.path.name
+        package_array.each do |p|
+          if File::exists?(p)
+            puts p +' exists'
+            Net::SCP.start(@instance.ip.name, @instance.account.username, :password => @instance.account.password, :port => @instance.port.name) do |scp|
+              scp.upload! p, path do |ch, name, sent, total|
+                print "\r#{name}: #{(sent.to_f * 100 / total.to_f).to_i}%"
+              end
+              print "\n"
+              puts p + ' to ' + path + ' upload successfully'
+            end
+          else
+            puts p + ' does not exist'
+          end
+        end
+      end
+    else
+      flash[:notice] = ["no packages"]
+      redirect_to :action => 'error'
+    end
     
   end
   def command_send
@@ -162,6 +187,25 @@ class InstancesController < ApplicationController
       @instance_array << instance_hash
       
     end
+    
+  end
+  def test_ssh
+    instance = Instance.find(params[:id])
+    begin
+      Timeout.timeout(2) do 
+        Net::SSH.start(instance.ip.name, instance.account.username, :password => instance.account.password, :port => instance.port.name) do |ssh|
+          @ret = ssh.exec! 'pwd'
+        end
+      end
+    rescue Exception
+      if @ret == nil
+        flash[:notice] = ["connected failed"]
+        redirect_to :action => 'error'
+      end
+    end
+
+  end
+  def error
     
   end
 end

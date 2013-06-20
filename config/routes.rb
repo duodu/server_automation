@@ -1,32 +1,18 @@
 ServerAutomation::Application.routes.draw do
-  resources :packages
-
-
   match "instances/:id/command" => "instances#command"
   match "instances/:id/command_send" => "instances#command_send"
   match "instances/read_deploy" => "instances#read_deploy"
   match "instances/:id/deploy" => "instances#deploy"
-  
+  match "instances/:id/test_ssh" => "instances#test_ssh"
+  match "instances/error" => "instances#error"
+  resources :packages
   resources :paths
-
-
-
-  
-
   resources :instances
-
-
   resources :accounts
-
-
   resources :ports
-
-
   resources :ips
-
-
   resources :commands
-
+  root :to => "instances#index"
 
 
 

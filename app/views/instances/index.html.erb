@@ -19,6 +19,7 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @instances.each do |instance| %>
@@ -31,6 +32,7 @@
     <td><%= link_to 'Show', instance %></td>
     <td><%= link_to 'Edit', edit_instance_path(instance) %></td>
     <td><%= link_to 'Destroy', instance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'test_ssh', :action => 'test_ssh', :id => instance.id %></td>
     <td><%= link_to 'Command', :action => 'command', :id => instance.id %></td>
     <td><%= link_to 'Deploy', :action => 'deploy', :id => instance.id %></td>
   </tr>
@@ -40,3 +42,11 @@
 <br />
 
 <%= link_to 'New Instance', new_instance_path %>
+<%= link_to 'Read deploy', :action=>'read_deploy' %>
+<br />
+<%= link_to 'Manage IP', ips_path %>
+<%= link_to 'Manage Port', ports_path %>
+<%= link_to 'Manage Account', accounts_path %>
+<%= link_to 'Manage Path', paths_path %>
+<%= link_to 'Manage Command', commands_path %>
+<%= link_to 'Manage Packages', packages_path %>
