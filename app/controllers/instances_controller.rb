@@ -93,9 +93,10 @@ class InstancesController < ApplicationController
     @instance = Instance.find(params[:id])
     @cmd_array = Command.all.map { |cmd| [cmd.name, cmd.id] }
   end
-  def deploy
+  def messages
     Dir::chdir('E:/lib/')
     @instance = Instance.find(params[:id])
+    msgs = Array.new
     if !Package.where("ip = ? and username = ?",@instance.ip.name,@instance.account.username).empty?
       packages = Package.where("ip = ? and username = ?",@instance.ip.name,@instance.account.username)
       packages.each do |package|
@@ -103,16 +104,16 @@ class InstancesController < ApplicationController
         path = package.path.name
         package_array.each do |p|
           if File::exists?(p)
-            puts p +' exists'
+            msgs << p +' exists'
             Net::SCP.start(@instance.ip.name, @instance.account.username, :password => @instance.account.password, :port => @instance.port.name) do |scp|
               scp.upload! p, path do |ch, name, sent, total|
-                print "\r#{name}: #{(sent.to_f * 100 / total.to_f).to_i}%"
+                msgs << "#{name}: #{(sent.to_f * 100 / total.to_f).to_i}%"
               end
-              print "\n"
-              puts p + ' to ' + path + ' upload successfully'
+              #print "\n"
+              msgs << p + ' to ' + path + ' upload successfully'
             end
           else
-            puts p + ' does not exist'
+            msgs << p + ' does not exist'
           end
         end
       end
@@ -120,7 +121,20 @@ class InstancesController < ApplicationController
       flash[:notice] = ["no packages"]
       redirect_to :action => 'error'
     end
+    length = session[:num].to_i
+    @messages = msgs[0, length]
+    session[:num] = length + 1
     
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+  def deploy
+    @instance = Instance.find(params[:id])
+    
+    respond_to do |format|
+      format.html
+    end
   end
   def command_send
     @instance = Instance.find(params[:id])

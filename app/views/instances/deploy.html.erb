@@ -1,8 +1,16 @@
+<%= javascript_include_tag "chat.js" %>
+
 <%= @instance.ip.name %>
 <br />
 <%= @instance.account.username %>
 <br />
-deployed successfully
+
+
+  <!-- 显示聊天信息列表 -->
+  <div id="messages">
+  </div>
+
+
 <br />
 <br />
 <%= link_to 'Back', instances_path %>
