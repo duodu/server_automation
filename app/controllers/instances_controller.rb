@@ -213,9 +213,10 @@ class InstancesController < ApplicationController
   def upload
     require 'find'
     require 'fileutils'
+    #require 'ftools'
     file = params[:file]
     File.open(Rails.root.join('public', 'uploads', file.original_filename), 'wb') do |f| 
       f.write(file.read)
-    end 
+    end
   end
 end

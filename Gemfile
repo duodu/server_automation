@@ -10,7 +10,7 @@ gem 'net-ssh'
 gem 'net-sftp'
 gem 'net-scp'
 gem 'roo'
-
+gem 'ftools'
 
 
 # Gems used only for assets and not required
