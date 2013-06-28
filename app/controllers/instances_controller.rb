@@ -210,4 +210,12 @@ class InstancesController < ApplicationController
   def error
     
   end
+  def upload
+    require 'find'
+    require 'fileutils'
+    file = params[:file]
+    File.open(Rails.root.join('public', 'uploads', file.original_filename), 'wb') do |f| 
+      f.write(file.read)
+    end 
+  end
 end

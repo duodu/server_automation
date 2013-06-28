@@ -40,6 +40,10 @@
 </table>
 
 <br />
+<%= form_tag :action => 'upload', :multipart => true do %>
+	<%= file_field_tag 'file'  %>
+	<%= submit_tag 'upload' %>
+<% end %>
 
 <%= link_to 'New Instance', new_instance_path %>
 <%= link_to 'Read deploy', :action=>'read_deploy' %>

@@ -5,6 +5,7 @@ ServerAutomation::Application.routes.draw do
   match "instances/:id/deploy" => "instances#deploy"
   match "instances/:id/test_ssh" => "instances#test_ssh"
   match "instances/error" => "instances#error"
+  match "instances/upload" => "instances#upload"
   resources :packages
   resources :paths
   resources :instances
