@@ -104,6 +104,9 @@ class InstancesController < ApplicationController
         package_array.each do |p|
           if File::exists?(p)
             puts p +' exists'
+            Net::SSH.start(@instance.ip.name, @instance.account.username, :password => @instance.account.password, :port => @instance.port.name) do |ssh|
+              ssh.exec! 'rm -f #{path}/#{p}'
+            end
             Net::SCP.start(@instance.ip.name, @instance.account.username, :password => @instance.account.password, :port => @instance.port.name) do |scp|
               scp.upload! p, path do |ch, name, sent, total|
                 print "\r#{name}: #{(sent.to_f * 100 / total.to_f).to_i}%"
